@@ -1,8 +1,14 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>accueil</title>
+    <title>Accueil</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -16,21 +22,22 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+
 <div class="container">
+<br>
     <div class="row">
         <div class="col" style="text-align: center">
-            <h1>bonjour et bienvenue</h1>
+            <h1>Bienvenue</h1>
         </div>
     </div>
+    <br><br>
     <div class="row">
         <div class="col-6" style="text-align: center">
-            <a href="viewnewuser.php"><input
-                        type="button" value="Iscription" class="btn btn-dark"/></a>
+            <a href="viewnewuser.php"><input type="button" value="Inscription" class="btn btn-dark"/></a>
         </div>
 
         <div class="col-6" style="text-align: center">
-            <a href="viewlogin.php"><input
-                    type="button" value="Connection" class="btn btn-dark"/></a>
+            <a href="viewlogin.php"><input type="button" value="Connexion" class="btn btn-dark"/></a>
         </div>
     </div>
 

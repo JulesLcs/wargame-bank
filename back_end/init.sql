@@ -1,4 +1,9 @@
--- Création de la table "users"
+-- --Creation de la bdd
+-- CREATE DATABASE bank;
+-- --Connexion à la base
+-- \c bank;
+
+-- Creation de la table "users"
 CREATE TABLE users (
    id SERIAL PRIMARY KEY,
    nom VARCHAR(255),
@@ -8,7 +13,7 @@ CREATE TABLE users (
    solde DECIMAL(10, 2) DEFAULT 0.00
 );
 
--- Création de la table "transferts"
+-- Creation de la table "transferts"
 CREATE TABLE transferts (
    id SERIAL PRIMARY KEY,
    sender_id INT REFERENCES users(id),
