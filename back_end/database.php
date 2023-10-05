@@ -1,5 +1,5 @@
 <?php
-include "../back_end/constants.php";
+include "constants.php";
 
 function dbConnect() {
     try {

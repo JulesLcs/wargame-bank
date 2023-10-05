@@ -1,14 +1,13 @@
 <?php
 session_start();
 
-include "../back_end/database.php";
+include "database.php";
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $db = dbConnect();
-
 if (isset($_GET['func'])) {
     $_GET['func']($db);
 }
@@ -37,22 +36,41 @@ function insertnewuser($db) {
 
 }
 
-
 function connect($db){
-    $mail = $_POST['mail'];
+    $mail = filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL);
     $password = $_POST['password'];
-    $sql= "SELECT id, mail, pwd FROM users WHERE mail = '".$mail."';";
-    $sth = $db->prepare($sql);
-    $sth->execute();
-    $result = $sth->fetch();
-    var_dump(type($sql));
-    var_dump($result);
-    if (password_verify($password, $result['password'])) {
+    
+    $query = "SELECT id,mail,pwd FROM users WHERE mail = :mail AND pwd = :password";
+    $stmt = $db->prepare($query);
+    if ($stmt === false) {
+        die("Erreur de préparation de la requête : " . $db->errorInfo()[2]);
+    }
+    $stmt->bindParam(':mail', $mail);
+    $stmt->bindParam(':password', $password);
+    $stmt->execute();
+    $result = $stmt->fetch($db::FETCH_ASSOC);
+
+    if ($result) {
         $_SESSION['id'] = $result['id'];
         header('Location:../front_end/viewadmin.php');        
     }
     else
         header('Location:../front_end/viewlogin.php?loginError=true');
 }
+
+// function connect($db){
+//     $mail = $_POST['mail'];
+//     $password = $_POST['password'];
+//     $sql= "SELECT id, mail, pwd FROM users WHERE mail = '".$mail."';";
+//     $sth = $db->prepare($sql);
+//     $sth->execute();
+//     $result = $sth->fetch();
+//     if (password_verify($password, $result['password'])) {
+//         $_SESSION['id'] = $result['id'];
+//         header('Location:../front_end/viewadmin.php');        
+//     }
+//     else
+//         header('Location:../front_end/viewlogin.php?loginError=true');
+// }
 
 ?>

@@ -43,7 +43,7 @@ error_reporting(E_ALL);
                     include "../back_end/controller.php";
 
                     $id = $_SESSION['id'];
-                    $sql = "SELECT * FROM utilisateur WHERE id = '$id';";
+                    $sql = "SELECT * FROM users WHERE id = '$id';";
                     $statement = $db->prepare($sql);
                     $statement->execute();
                     $result = $statement->fetch();
@@ -59,15 +59,14 @@ error_reporting(E_ALL);
                    <!--     <th scope="col">#</th> -->
                         <th scope="col">Nom</th>
                         <th scope="col">Prenom</th>
-                        <th scope="col">Note</th>
-                        <th scope="col">Mise à jour</th>
+                        <th scope="col">Solde</th>
                     </tr>
                     </thead>
                     <tbody>
                 <?php
 
 
-                $sql = "SELECT * FROM etudiant WHERE user_id = '$id'";
+                $sql = "SELECT * FROM users WHERE id = '$id'";
                 $sth = $db->prepare($sql);
                 $sth->execute();
                 $sth = $sth->fetchAll();
@@ -77,12 +76,7 @@ error_reporting(E_ALL);
                     <!--    <th scope="row">1</th> -->
                         <td>'.$data['nom'].'</td>
                         <td>'.$data['prenom'].'</td>
-                        <td>'.$data['note'].'</td>
-                        <td>
-                            <form action="../front_end/view-editetudiant.php" method="post">
-                                <button type="submit" name="edit" value="'.$data['id'].'" class="btn btn-primary">Modifier</button>
-                            </form>
-                        </td>
+                        <td>'.$data['solde'].'</td>
                     </tr>
                 ';
                 }
