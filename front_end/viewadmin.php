@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+session_start();
 ?>
 
     <!DOCTYPE html>
@@ -40,13 +41,20 @@ error_reporting(E_ALL);
                 <?php
                     include "../back_end/controller.php";
 
-                    $id = $_SESSION['id'];
-                    $sql = "SELECT * FROM users WHERE id = '$id';";
-                    $statement = $db->prepare($sql);
-                    $statement->execute();
-                    $result = $statement->fetch();
-
-                    echo "<p>".$result['prenom'] . " " . $result['nom']."</p>";
+                    if (isset($_SESSION['id'])) {
+                        $id = $_SESSION['id'];
+                        $sql = "SELECT * FROM users WHERE id = '$id';";
+                        $statement = $db->prepare($sql);
+                        $statement->execute();
+                        $result = $statement->fetch();
+    
+                        echo "<p>".$result['prenom'] . " " . $result['nom']."</p>";
+                    } else {
+                        // Redirigez l'utilisateur ou gérez l'absence de la variable de session
+                        header('Location:../front_end/viewlogin.php');
+                        exit(); // Assurez-vous de quitter le script après l'envoi des en-têtes de redirection
+                    }
+                   
                     ?>
 
                     <h3>Liste de vos étudiants</h3>

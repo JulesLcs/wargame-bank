@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 include "database.php";
 
 ini_set('display_errors', 1);
@@ -47,10 +45,13 @@ function connect($db){
     $stmt->bindParam(':mail', $mail);
     $stmt->execute();
     $result = $stmt->fetch();
-    var_dump($result);
+    session_start();
+
     if (password_verify($password, $result['pwd'])) {
         $_SESSION['id'] = $result['id'];
-        header('Location:../front_end/viewadmin.php');        
+        //var_dump($_SESSION['id']);
+        header('Location:../front_end/viewadmin.php');
+        exit();      
     }
     else
         header('Location:../front_end/viewlogin.php?loginError=true');

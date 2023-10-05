@@ -15,21 +15,24 @@ RUN docker-php-ext-configure pdo_pgsql --with-pdo-pgsql \
 COPY . /var/www/html
 
 # Copie du fichier SQL dans le conteneur
-COPY init.sql /docker-entrypoint-initdb.d/
+# COPY back_end/init.sql /docker-entrypoint-initdb.d/
 
 # Configuration de PostgreSQL
-ENV POSTGRES_DB mydatabase
-ENV POSTGRES_USER myuser
-ENV POSTGRES_PASSWORD mypassword
+ENV POSTGRES_DB bank
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD Isen2018
+
+# Copie des fichiers de configuration
+COPY back_end/pg_hba.conf /etc/postgresql/15/main/pg_hba.conf
 
 # Initialisation de la base de données (vous pouvez exécuter vos scripts SQL ici)
 RUN service postgresql start \
-    && su - postgres -c "psql -U postgres -d postgres -c \"CREATE USER myuser WITH PASSWORD 'mypassword';\"" \
-    && su - postgres -c "psql -U postgres -d postgres -c \"CREATE DATABASE mydatabase OWNER myuser;\"" \
-    && service postgresql stop
+    && su - postgres -c "psql -U postgres -d postgres -c \"ALTER USER postgres PASSWORD 'Isen2018';\"" \
+    && su - postgres -c "psql -U postgres -d postgres -c \"CREATE DATABASE bank OWNER postgres;\"" \
+    && su - postgres -c "psql -U postgres -d bank -f /var/www/html/back_end/init.sql"
 
 # Exposition du port 80 pour le serveur web
 EXPOSE 80
 
-# Commande pour démarrer le serveur Apache
-CMD ["apache2-foreground"]
+# Commande pour démarrer le serveur Apache et postgresql
+CMD service postgresql start && apache2-foreground
