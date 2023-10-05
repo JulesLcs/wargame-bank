@@ -32,45 +32,27 @@ function insertnewuser($db) {
     $statement->bindParam(':prenom', $prenom);
     $statement->execute();
 
-    header('Location: ../front_end/index.php');
+    header('Location: ../index.php');
 
 }
 
 function connect($db){
     $mail = filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL);
-    $password = $_POST['password'];
-    
-    $query = "SELECT id,mail,pwd FROM users WHERE mail = :mail AND pwd = :password";
+    $password = $_POST['password'];  
+    $query = "SELECT id, mail, pwd FROM users WHERE mail = :mail";
     $stmt = $db->prepare($query);
     if ($stmt === false) {
         die("Erreur de préparation de la requête : " . $db->errorInfo()[2]);
     }
     $stmt->bindParam(':mail', $mail);
-    $stmt->bindParam(':password', $password);
     $stmt->execute();
-    $result = $stmt->fetch($db::FETCH_ASSOC);
-
-    if ($result) {
+    $result = $stmt->fetch();
+    var_dump($result);
+    if (password_verify($password, $result['pwd'])) {
         $_SESSION['id'] = $result['id'];
         header('Location:../front_end/viewadmin.php');        
     }
     else
         header('Location:../front_end/viewlogin.php?loginError=true');
 }
-
-// function connect($db){
-//     $mail = $_POST['mail'];
-//     $password = $_POST['password'];
-//     $sql= "SELECT id, mail, pwd FROM users WHERE mail = '".$mail."';";
-//     $sth = $db->prepare($sql);
-//     $sth->execute();
-//     $result = $sth->fetch();
-//     if (password_verify($password, $result['password'])) {
-//         $_SESSION['id'] = $result['id'];
-//         header('Location:../front_end/viewadmin.php');        
-//     }
-//     else
-//         header('Location:../front_end/viewlogin.php?loginError=true');
-// }
-
 ?>

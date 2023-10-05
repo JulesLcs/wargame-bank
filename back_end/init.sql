@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS transferts (
 
 INSERT INTO users (nom, prenom, mail, pwd, solde)
 VALUES
-  ('Lucas', 'Jules', 'lucas.jules@isen.com', 'motdepasse1', 1000.00),
-  ('Bouju', 'Guillaume', 'bouju.guillaume@isen.com', 'motdepasse2', 1500.00),
-  ('Sicot', 'François', 'sicot.françois@isen.com', 'motdepasse3', 2000.00);
+  ('Lucas', 'Jules', 'lucas.jules@isen.com', '$2y$10$MRhFYy2BYtfTOhMIj3F64uAV9ykFf6qAUOagLVsxmqmAq06WZLUCu', 1000.00),
+  ('Bouju', 'Guillaume', 'bouju.guillaume@isen.com', '$2y$10$bcSZhuoKW5pwL0mzxazdoOvmnaSDvnoXbFkU7NjW.uMaA.UjpzkOq', 1500.00),
+  ('Sicot', 'François', 'sicot.françois@isen.com', '$2y$10$qFyk/ksdSxMbaNjVtveMLOHJ2Ah4ejRfI23GS6keyym/vPgQQogGi', 2000.00);
 
 INSERT INTO transferts (sender_id, reciever_id, montant)
 VALUES
