@@ -1,0 +1,1 @@
+SELECT id, mail, pwd FROM users WHERE mail = 'bouju.guillaume@isen.com';

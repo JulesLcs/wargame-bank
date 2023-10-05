@@ -1,20 +1,19 @@
--- --Creation de la bdd
--- CREATE DATABASE bank;
--- --Connexion à la base
--- \c bank;
-
+--DROP DATABASE IF EXISTS bank;
+--CREATE DATABASE bank;
+-- DROP TABLE transferts;
+-- DROP TABLE users;
 -- Creation de la table "users"
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
    id SERIAL PRIMARY KEY,
    nom VARCHAR(255),
    prenom VARCHAR(255),
-   email VARCHAR(255) UNIQUE,
+   mail VARCHAR(255) UNIQUE,
    pwd VARCHAR(255),
    solde DECIMAL(10, 2) DEFAULT 0.00
 );
 
 -- Creation de la table "transferts"
-CREATE TABLE transferts (
+CREATE TABLE IF NOT EXISTS transferts (
    id SERIAL PRIMARY KEY,
    sender_id INT REFERENCES users(id),
    reciever_id INT REFERENCES users(id),
@@ -22,7 +21,7 @@ CREATE TABLE transferts (
    date TIMESTAMP DEFAULT current_timestamp
 );
 
-INSERT INTO users (nom, prenom, email, pwd, solde)
+INSERT INTO users (nom, prenom, mail, pwd, solde)
 VALUES
   ('Lucas', 'Jules', 'lucas.jules@isen.com', 'motdepasse1', 1000.00),
   ('Bouju', 'Guillaume', 'bouju.guillaume@isen.com', 'motdepasse2', 1500.00),

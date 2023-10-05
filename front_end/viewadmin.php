@@ -8,7 +8,7 @@ error_reporting(E_ALL);
     <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>TP10_PHP</title>
+        <title>Bankisen</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
               crossorigin="anonymous">
@@ -29,9 +29,9 @@ error_reporting(E_ALL);
             <div class="col col-md-12" style="text-align: center">
             <br>
                 <h1>Admin Page</h1>
-                <a href="index.php"><input type="button" value="Accueil" class="btn btn-dark"/></a>
-                <a href="view-newetudiant.php"><input type="button" value="Ajouter étudiant" class="btn btn-dark"/></a>
-                <a href="viewlogin.php"><input type="submit" value="Déconnexion" class="btn btn-dark"/></a>
+                <a href="../front_end/index.php"><input type="button" value="Accueil" class="btn btn-dark"/></a>
+                <a href="../front_end/view-newetudiant.php"><input type="button" value="Ajouter étudiant" class="btn btn-dark"/></a>
+                <a href="../front_end/viewlogin.php"><input type="submit" value="Déconnexion" class="btn btn-dark"/></a>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@ error_reporting(E_ALL);
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <?php
-                    include "controller.php";
+                    include "../back_end/controller.php";
 
                     $id = $_SESSION['id'];
                     $sql = "SELECT * FROM utilisateur WHERE id = '$id';";
@@ -79,7 +79,7 @@ error_reporting(E_ALL);
                         <td>'.$data['prenom'].'</td>
                         <td>'.$data['note'].'</td>
                         <td>
-                            <form action="view-editetudiant.php" method="post">
+                            <form action="../front_end/view-editetudiant.php" method="post">
                                 <button type="submit" name="edit" value="'.$data['id'].'" class="btn btn-primary">Modifier</button>
                             </form>
                         </td>

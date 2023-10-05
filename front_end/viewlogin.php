@@ -8,15 +8,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 if (!empty($_GET['error'])){
-	if ( $_GET['error'] == 'login'){
-		echo" <script> alert('Le mot de passe est incorrecte') </script>";
-	}
+		echo" <script> alert('Login ou mot de passe incorrect') </script>";
 }
 ?>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>TP10</title>
+    <title>Bankisen</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -35,15 +33,15 @@ if (!empty($_GET['error'])){
             <div class="col col-md-12" style="text-align: center">
             <br>
                 <h1>Connexion</h1>
-                <a href="index.php"><input type="button" value="Accueil" class="btn btn-dark"/></a>
+                <a href="../front_end/index.php"><input type="button" value="Accueil" class="btn btn-dark"/></a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form  action='controller.php?func=connect' method="post">
+                <form  action='../back_end/controller.php?func=connect' method="post">
                     <div class="form-group">
-                        <label for="citation">Login</label>
-                        <input class="form-control" type="text" name="login" required>
+                        <label for="citation">Mail</label>
+                        <input class="form-control" type="text" name="mail" required>
                     </div>
                     <div class="form-group">
                         <label for="citation">Mot de passe</label>

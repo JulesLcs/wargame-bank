@@ -6,15 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 if (!empty($_GET['error'])){
-	if ( $_GET['error'] == 'MDP'){
-		echo" <script> alert('Vos MDP sont différents') </script>";
-	}
-    if ( $_GET['error'] == 'Login'){
-		echo" <script> alert('Ce login existe déjà') </script>";
-	}
-    if ( $_GET['error'] == 'Mail'){
-		echo" <script> alert('Ce mail existe déjà') </script>";
-	}
+		echo" <script> alert('Login ou mot de passe incorrect') </script>";
 }
 ?>
 
@@ -41,13 +33,13 @@ if (!empty($_GET['error'])){
             <div class="col col-md-12" style="text-align: center">
             <br>
                 <h1>Ajout utilisateur</h1>
-                <a href="index.php"><input type="button" value="Accueil" class="btn btn-dark"/></a>
+                <a href="../front_end/index.php"><input type="button" value="Accueil" class="btn btn-dark"/></a>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form action='controller.php?func=insertnewuser' method="post">
+                <form action='../back_end/controller.php?func=insertnewuser' method="post">
                     <div class="form-group">
                         <label for="fname">Nom</label>
                         <input class="form-control" type="text" name="lastname" required>
@@ -59,10 +51,6 @@ if (!empty($_GET['error'])){
                     <div class="form-group">
                         <label for="mail">Mail</label>
                         <input class="form-control" type="text" name="mail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="citation">Login</label>
-                        <input class="form-control" type="text" name="login" required>
                     </div>
                     <div class="form-group">
                         <label for="citation">Mot de passe</label>
