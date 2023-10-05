@@ -33,11 +33,11 @@ error_reporting(E_ALL);
     <br><br>
     <div class="row">
         <div class="col-6" style="text-align: center">
-            <a href="viewnewuser.php"><input type="button" value="Inscription" class="btn btn-dark"/></a>
+            <a href="front_end/viewnewuser.php"><input type="button" value="Inscription" class="btn btn-dark"/></a>
         </div>
 
         <div class="col-6" style="text-align: center">
-            <a href="viewlogin.php"><input type="button" value="Connexion" class="btn btn-dark"/></a>
+            <a href="front_end/viewlogin.php"><input type="button" value="Connexion" class="btn btn-dark"/></a>
         </div>
     </div>
 

@@ -33,7 +33,7 @@ if (!empty($_GET['error'])){
             <div class="col col-md-12" style="text-align: center">
             <br>
                 <h1>Ajout utilisateur</h1>
-                <a href="../front_end/index.php"><input type="button" value="Accueil" class="btn btn-dark"/></a>
+                <a href="../index.php"><input type="button" value="Accueil" class="btn btn-dark"/></a>
             </div>
         </div>
         <br>
