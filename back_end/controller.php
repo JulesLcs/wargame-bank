@@ -1,4 +1,5 @@
 <?php
+
 include "database.php";
 
 ini_set('display_errors', 1);
@@ -49,7 +50,6 @@ function connect($db){
     $stmt->bindParam(':mail', $mail);
     $stmt->execute();
     $result = $stmt->fetch();
-
     if (!$result) {
         header('Location:../front_end/viewlogin.php?loginError=true');
         exit();
@@ -62,6 +62,50 @@ function connect($db){
     } else {
         header('Location:../front_end/viewlogin.php?loginError=true');
     }
-    
+}
+
+function transfert($db){
+    //creation de l'objet transfert
+    $montant = $_POST['montant'];
+    $destinataire = $_POST['destinataire'];
+    $query = "SELECT solde FROM users WHERE id = :expediteur_id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':expediteur_id', $_SESSION['id']);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    if ($montant > $result['solde']) {
+        echo "Solde insuffisant pour effectuer le transfert.";
+        exit;
+    }
+    $db->beginTransaction();
+    try{
+        $query = "INSERT INTO transferts (sender_id, reciever_id, montant) VALUES (:expediteur_id, :destinataire_id, :montant)";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':expediteur_id', $_SESSION['id']);
+        $stmt->bindParam(':destinataire_id', $destinataire);
+        $stmt->bindParam(':montant', $montant);
+        $stmt->execute();
+
+        //maj des soldes des comptes
+        $query = "UPDATE users SET solde = solde-:montant WHERE id = :expediteur_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':montant',$montant);
+        $stmt->bindParam(':expediteur_id', $_SESSION['id']);
+        $stmt->execute();
+
+        $query = "UPDATE users SET solde = solde +:montant WHERE id = :destinataire_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':montant',$montant);
+        $stmt->bindParam(':destinataire_id', $destinataire);
+        $stmt->execute();
+
+
+        $db->commit();
+        header('Location:../front_end/viewadmin.php');  
+    } catch (Exception $e) {
+        // En cas d'erreur, annuler la transaction
+        $db->rollBack();
+        echo "Erreur lors du transfert : " . $e->getMessage();
+    }
 }
 ?>

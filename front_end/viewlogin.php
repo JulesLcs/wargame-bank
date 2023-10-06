@@ -16,8 +16,6 @@ if(!empty($_GET['loginError'])) {
         include($file);
     }
 }
-
-
 ?>
 <html lang="fr">
 <head>
