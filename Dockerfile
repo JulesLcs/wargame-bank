@@ -14,8 +14,11 @@ RUN docker-php-ext-configure pdo_pgsql --with-pdo-pgsql \
 # Copie des fichiers de l'application dans le conteneur
 COPY . /var/www/html
 
-# Copie du fichier SQL dans le conteneur
-# COPY back_end/init.sql /docker-entrypoint-initdb.d/
+# Copiez le fichier de configuration personnalisé dans le conteneur
+COPY custom-apache2.conf /usr/local/apache2/conf/custom-apache2.conf
+
+# Incluez le fichier de configuration personnalisé dans apache2.conf
+RUN echo "Include /usr/local/apache2/conf/custom-apache2.conf" >> /usr/local/apache2/conf/apache2.conf
 
 # Configuration de PostgreSQL
 ENV POSTGRES_DB bank
