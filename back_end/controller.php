@@ -5,6 +5,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+if(!isset($_SESSION)) { 
+    session_start(); 
+}
+
 $db = dbConnect();
 if (isset($_GET['func'])) {
     $_GET['func']($db);
@@ -45,15 +49,19 @@ function connect($db){
     $stmt->bindParam(':mail', $mail);
     $stmt->execute();
     $result = $stmt->fetch();
-    session_start();
 
-    if (password_verify($password, $result['pwd'])) {
-        $_SESSION['id'] = $result['id'];
-        //var_dump($_SESSION['id']);
-        header('Location:../front_end/viewadmin.php');
-        exit();      
-    }
-    else
+    if (!$result) {
         header('Location:../front_end/viewlogin.php?loginError=true');
+        exit();
+    
+    } else if (password_verify($password, $result['pwd']) && $result) {
+        $_SESSION['id'] = $result['id'];
+        header('Location:../front_end/viewadmin.php');
+        exit();
+    
+    } else {
+        header('Location:../front_end/viewlogin.php?loginError=true');
+    }
+    
 }
 ?>

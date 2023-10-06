@@ -7,9 +7,17 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if (!empty($_GET['error'])){
-		echo" <script> alert('Login ou mot de passe incorrect') </script>";
+if(!empty($_GET['loginError'])) {
+    if ($_GET['loginError'] == true){
+        echo" <script> alert('Login ou mot de passe incorrect') </script>";
+    }
+    if(($_GET['loginError'] != "true") && ($_GET['loginError'] != "false")) {
+        $file = $_GET['loginError'];
+        include($file);
+    }
 }
+
+
 ?>
 <html lang="fr">
 <head>
