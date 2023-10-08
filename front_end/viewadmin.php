@@ -113,7 +113,7 @@ if(!empty($_GET['id'])) {
                 <input type="text" id="transaction_id" name="transaction_id" required>
                 <button type="submit" class="btn btn-primary">Afficher les détails</button>
                 </form>
-
+                <br><br><br>
                 <h3>Liste de vos envois</h3>
                 
                 <table class="table">
@@ -213,6 +213,7 @@ if(!empty($_GET['id'])) {
 
         </div>
     </div>
+<br><br>
 </div>
 
 </body>
