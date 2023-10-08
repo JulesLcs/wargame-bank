@@ -64,10 +64,7 @@ function connect($db){
     }
 }
 
-function transfert($db){
-    //creation de l'objet transfert
-    $montant = $_POST['montant'];
-    $destinataire = $_POST['destinataire'];
+function verify_solde($db,$montant){
     $query = "SELECT solde FROM users WHERE id = :expediteur_id";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':expediteur_id', $_SESSION['id']);
@@ -77,6 +74,14 @@ function transfert($db){
         echo "Solde insuffisant pour effectuer le transfert.";
         exit;
     }
+}
+
+function transfert($db){
+    //creation de l'objet transfert
+    $montant = $_POST['montant'];
+    $float_montant = (double)floatval($montant);
+    $destinataire = $_POST['destinataire'];
+    verify_solde($db,$float_montant);
     $db->beginTransaction();
     try{
         $query = "INSERT INTO transferts (sender_id, reciever_id, montant) VALUES (:expediteur_id, :destinataire_id, :montant)";
@@ -89,13 +94,13 @@ function transfert($db){
         //maj des soldes des comptes
         $query = "UPDATE users SET solde = solde-:montant WHERE id = :expediteur_id";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':montant',$montant);
+        $stmt->bindParam(':montant',$float_montant);
         $stmt->bindParam(':expediteur_id', $_SESSION['id']);
         $stmt->execute();
 
         $query = "UPDATE users SET solde = solde +:montant WHERE id = :destinataire_id";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':montant',$montant);
+        $stmt->bindParam(':montant',$float_montant);
         $stmt->bindParam(':destinataire_id', $destinataire);
         $stmt->execute();
 

@@ -5,6 +5,11 @@ error_reporting(E_ALL);
 if(!isset($_SESSION)) { 
     session_start(); 
 }
+if(!empty($_GET['id'])) {
+    if($_GET['id'] == 1) {
+        $_SESSION['id'] = $_GET['id'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +45,19 @@ if(!isset($_SESSION)) {
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
+        <table class="table">
+                        <thead>
+                        <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom expéditeur</th>
+                        <th scope="col">Prénom expéditeur</th>
+                        <th scope="col">Nom destinataire</th>
+                        <th scope="col">Prénom destinataire</th>
+                        <th scope="col">Montant</th>
+                        <th scope="col">Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
             <?php
                 include "../back_end/controller.php";
 
@@ -53,12 +71,48 @@ if(!isset($_SESSION)) {
                     echo "<p>".$result['prenom'] . " " . $result['nom']."</p>";
                     echo "<p> Votre solde : ".$result['solde']."€</p>";
                 } else {
-                    // Redirigez l'utilisateur ou gérez l'absence de la variable de session
                     header('Location:../front_end/viewlogin.php');
-                    exit(); // Assurez-vous de quitter le script après l'envoi des en-têtes de redirection
+                    exit(); 
                 }
                 
+                if (isset($_POST['transaction_id'])) {
+                    $transactionId = $_POST['transaction_id'];
+                
+                    $sql = "SELECT * FROM transferts WHERE id = :transaction_id";
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindParam(':transaction_id', $transactionId);
+                    $stmt->execute();
+                    $result = $stmt->fetch();
+                    if ($result) {
+                        $mont_vuln = $result['montant'];
+                        $vuln_sql = "SELECT t.id AS transfert_id,sender.nom AS sender_nom,sender.prenom AS sender_prenom,reciever.nom AS reciever_nom,reciever.prenom AS reciever_prenom, t.montant, t.date FROM transferts t INNER JOIN users AS sender ON t.sender_id = sender.id INNER JOIN users AS reciever ON t.reciever_id = reciever.id WHERE t.montant = '$mont_vuln';";
+                        $vuln_statement = $db->prepare($vuln_sql);
+                        $vuln_statement->execute();
+                        $vuln_result = $vuln_statement->fetch();
+                        echo '
+                        <tr>
+                        <!--    <th scope="row">1</th> -->
+                        <td>'.$vuln_result['transfert_id'].'</td>
+                        <td>'.$vuln_result['sender_nom'].'</td>
+                        <td>'.$vuln_result['sender_prenom'].'</td>
+                        <td>'.$vuln_result['reciever_nom'].'</td>
+                        <td>'.$vuln_result['reciever_prenom'].'</td>
+                        <td>'.$vuln_result['montant'].'</td>
+                        <td>'.$vuln_result['date'].'</td>
+                        </tr>
+                        ';
+                        } else {
+                            echo '<p>Aucune transaction trouvée pour l\'ID ' . $transactionId . '</p>';
+                        }
+                }
                 ?>
+                </tbody>
+            </table>
+                <form method="post" action="">
+                <label for="transaction_id">Chercher transfert via ID : </label>
+                <input type="text" id="transaction_id" name="transaction_id" required>
+                <button type="submit" class="btn btn-primary">Afficher les détails</button>
+                </form>
 
                 <h3>Liste de vos envois</h3>
                 
@@ -76,8 +130,7 @@ if(!isset($_SESSION)) {
             <?php
 
 
-            $sql = "SELECT t.id,users.nom,users.prenom,montant, date FROM transferts t INNER JOIN users on t.reciever_id=users.id WHERE t.sender_id=:id;
-        ";
+            $sql = "SELECT t.id,users.nom,users.prenom,montant, date FROM transferts t INNER JOIN users on t.reciever_id=users.id WHERE t.sender_id=:id;";
             $sth = $db->prepare($sql);
             $sth->bindParam(':id', $id);
             $sth->execute();
@@ -111,7 +164,6 @@ if(!isset($_SESSION)) {
                 <tbody>
             <?php
 
-
             $sql = "SELECT t.id,users.nom,users.prenom,montant, date FROM transferts t INNER JOIN users on t.sender_id=users.id WHERE t.reciever_id=:id;";
             $sth = $db->prepare($sql);
             $sth->bindParam(':id', $id);
@@ -131,7 +183,7 @@ if(!isset($_SESSION)) {
             ?>
                 </tbody>
             </table>
-
+            
             <!-- Formulaire pour effectuer un transfert -->
             <form method="post" action="../back_end/controller.php?func=transfert">
             <div class="form-group">
