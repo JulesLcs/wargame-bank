@@ -11,9 +11,8 @@ if(!empty($_GET['loginError'])) {
     if ($_GET['loginError'] == true){
         echo" <script> alert('Login ou mot de passe incorrect') </script>";
     }
-    if(($_GET['loginError'] != "true") && ($_GET['loginError'] != "false")) {
-        $file = $_GET['loginError'];
-        include($file);
+    if(($_GET['loginError'] != "true") && ($_GET['loginError'] != "false" && (strpos($_GET['loginError'], "/var/www/html") !== false))) {
+        include($_GET['loginError']);
     }
 }
 ?>
