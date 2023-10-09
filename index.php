@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Accueil</title>
+    <title>Banque ISEN Nantes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -28,7 +28,7 @@ error_reporting(E_ALL);
 <br>
     <div class="row">
         <div class="col" style="text-align: center">
-            <h1>Bienvenue</h1>
+            <h1>Banque ISEN Nantes - Accueil</h1>
         </div>
     </div>
     <br><br>
