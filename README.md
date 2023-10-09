@@ -1,8 +1,8 @@
 # Wargame
 
-Le projet est un site internet de "Banque ISEN Nantes" qui comporte des vulnérabilités de différents niveaux qu'il vous faudra retrouver. 
+Le projet est un site internet de "Banque ISEN Nantes" qui comporte des vulnérabilitées de différents niveaux qu'il vous faudra retrouver. 
 
-Le site internet possède différentes fonctionnalités notamment celle de créer un compte sur le site de la banque.
+Le site internet possède différentes fonctionnalitées notamment celle de créer un compte sur le site de la banque.
 
 On peut également se connecter au site pour consulter son compte en banque, les transactions qui ont eut lieu et effectuer des virements d'argent aux autres clients de la banque.
 
