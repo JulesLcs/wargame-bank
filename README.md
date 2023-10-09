@@ -19,9 +19,6 @@ Mot de passe: `test123`
 Login: `bouju.guillaume@isen.com`
 Mot de passe: `guiguilamenace`
 
-Login: `sicot.françois@isen.com`
-Mot de passe: `faf`
-
 
 
 
