@@ -1,13 +1,13 @@
 # Wargame
 
-Le projet est à un site internet de "Banque ISEN Nantes" qui comporte des vulnérabilités de différents niveaux qu'il vous faudra retrouver. 
+Le projet est un site internet de "Banque ISEN Nantes" qui comporte des vulnérabilités de différents niveaux qu'il vous faudra retrouver. 
 
 Le site internet possède différentes fonctionnalités notamment celle de créer un compte sur le site de la banque.
 
 On peut également se connecter au site pour consulter son compte en banque, les transactions qui ont eut lieu et effectuer des virements d'argent aux autres clients de la banque.
 
 Pour déployer l'image, il existe 2 méthodes :
-- Depuis le dépôt Git
+- Depuis le dépôt Github
 - Depuis le Docker Hub (la plus simple)
 ## Variables utilisateurs
 
@@ -25,7 +25,7 @@ Mot de passe: `faf`
 
 
 
-## Déployer le site internet depuis Git
+## Déployer le site internet depuis Github
 
 Cloner le projet
 
