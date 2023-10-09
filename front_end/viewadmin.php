@@ -8,6 +8,8 @@ if(!isset($_SESSION)) {
 if(!empty($_GET['id'])) {
     if($_GET['id'] == 1) {
         $_SESSION['id'] = $_GET['id'];
+         echo "<p>Flag{[;iGqDGM59/5pa4}</p>";
+        
     }
 }
 ?>
