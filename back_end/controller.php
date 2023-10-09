@@ -108,9 +108,10 @@ function transfert($db){
         $db->commit();
         header('Location:../front_end/viewadmin.php');  
     } catch (Exception $e) {
-        // En cas d'erreur, annuler la transaction
-        $db->rollBack();
-        echo "Erreur lors du transfert : " . $e->getMessage();
-    }
+    $db->rollBack();
+    error_log("Erreur lors du transfert : " . $e->getMessage());
+    echo "Une erreur s'est produite lors du traitement de la transaction. Veuillez réessayer plus tard.";
+}
+
 }
 ?>
