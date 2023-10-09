@@ -9,9 +9,10 @@ RUN docker-php-ext-configure pdo_pgsql --with-pdo-pgsql \
     && docker-php-ext-install pdo pdo_pgsql
 
 COPY . /var/www/html
+
 COPY custom-apache2.conf /usr/local/apache2/conf/custom-apache2.conf
 
-RUN echo "Include /usr/local/apache2/conf/custom-apache2.conf" >> /usr/local/apache2/conf/apache2.conf
+RUN echo "include /usr/local/apache2/conf/custom-apache2.conf" >> /usr/local/apache2/conf/apache2.conf
 
 ENV POSTGRES_DB bank
 ENV POSTGRES_USER postgres

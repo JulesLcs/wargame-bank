@@ -1,3 +1,76 @@
-# wargame
+# Wargame
 
-isntallation de curl nécessaire
+Le projet est à un site internet de "Banque ISEN Nantes" qui comporte des vulnérabilités de différents niveaux qu'il vous faudra retrouver.
+
+Le site internet possède différentes fonctionnalités notamment celle de créer un compte sur le site de la banque.
+
+On peut également se connecter au site pour consulter son compte en banque, les transactions qui ont eut lieu et effectuer des virements d'argent aux autres clients de la banque.
+
+Pour déployer l'image, il existe 2 méthodes :
+- Depuis le dépôt Git
+- Depuis le Docker Hub (la plus simple)
+
+## Variables utilisateurs
+
+Pour vous connecter aux comptes utilisateurs, vous aurez besoin de différents identifiants/mot de passe
+
+Login: `lucas.jules@isen.com`
+Mot de passe:`test123`
+
+Login: `bouju.guillaume@isen.com`
+Mot de passe:`guiguilamenace`
+
+Login: `sicot.françois@isen.com`
+Mot de passe:`faf`
+
+
+
+
+## Déployer le site internet depuis Git
+
+Cloner le projet
+
+```bash
+  git clone https://github.com/JulesLcs/wargame-bank.git
+```
+
+Go to the project directory
+
+```bash
+  cd wargame-bank-main
+```
+
+Construire l'image
+
+```bash
+  docker build -t wargame-bank-website .
+```
+
+Démarrer le container
+
+```bash
+  docker run -p 80:80 -d wargame-bank-website
+```
+
+
+## Déployer le site internet depuis docker hub
+
+Récupérer l'image docker pull guillaumebj/wargame
+
+```bash
+  docker build -t wargame-bank-website .
+```
+
+Démarrer le container
+
+```bash
+  docker run -p 80:80 -d wargame-bank-website
+```
+
+
+## Flags
+
+Le site internet comporte des vulnérabilités volontaires. Il y en a 4 et sont nommés de la forme suivante : `Flag{secure_token}`
+
+Votre objectif : tous les trouver !
+
