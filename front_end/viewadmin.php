@@ -102,7 +102,7 @@ if(!empty($_GET['id'])) {
                         </tr>
                         ';
                         } else {
-                            echo '<p>Aucune transaction trouvée pour l\'ID ' . $transactionId . '</p>';
+                            echo '<p>Aucune transaction trouvée pour l\'ID ' . htmlspecialchars($transactionId, ENT_QUOTES, 'UTF-8') . '</p>';
                         }
                 }
                 ?>
