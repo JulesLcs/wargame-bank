@@ -30,7 +30,7 @@ VALUES
   ('admin', 'Flag{[;iGqDGM59/5pa4}', 'itsadminaccount@isen.com', 'azertyuiopqsdfghjklmwxcvbn', 1000000.00),
   ('Lucas', 'Jules', 'lucas.jules@isen.com', '$2y$10$MRhFYy2BYtfTOhMIj3F64uAV9ykFf6qAUOagLVsxmqmAq06WZLUCu', 1000.00),
   ('Bouju', 'Guillaume', 'bouju.guillaume@isen.com', '$2y$10$bcSZhuoKW5pwL0mzxazdoOvmnaSDvnoXbFkU7NjW.uMaA.UjpzkOq', 1500.00),
-  ('Sicot', 'François', 'sicot.françois@isen.com', '$2y$10$qFyk/ksdSxMbaNjVtveMLOHJ2Ah4ejRfI23GS6keyym/vPgQQogGi', 2000.00);
+  ('Sicot', 'François', 'sicot.françois@isen.com', '$2y$10$cofT06v3vJKLQcu15fP2TeuB0W5swCwT7RPh4bjTWnz0nS9ZeAH2C', 2000.00);
 
 INSERT INTO transferts (sender_id, reciever_id, montant)
 VALUES
