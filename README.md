@@ -14,13 +14,13 @@ Pour déployer l'image, il existe 2 méthodes :
 Pour vous connecter aux comptes utilisateurs, vous aurez besoin de différents identifiants/mot de passe
 
 Login: `lucas.jules@isen.com`
-Mot de passe:`test123`
+Mot de passe: `test123`
 
 Login: `bouju.guillaume@isen.com`
-Mot de passe:`guiguilamenace`
+Mot de passe: `guiguilamenace`
 
 Login: `sicot.françois@isen.com`
-Mot de passe:`faf`
+Mot de passe: `faf`
 
 
 
