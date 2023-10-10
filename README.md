@@ -36,12 +36,6 @@ Aller dans le répertoire du projet
   cd wargame-bank-main
 ```
 
-Renommer le fichier git
-
-```bash
-  mv _git .git
-```
-
 Construire l'image 
 
 ```bash
